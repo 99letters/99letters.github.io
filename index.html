@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 10px;
+            margin-left: 20px;
+            font-family: Times New Roman, serif;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+
+        .faq {
+            border: 2px solid #000;
+            /* 黒色の境界線を設定 */
+            padding: 20px;
+            /* 内側の余白を設定 */
+            margin: 20px 0;
+            /* 外側の上下の余白を設　ƒ定（左右は0） */
+        }
+
+        .faq dt {
+            border: 2px solid #000;
+            cursor: pointer;
+            /* マウスカーソルをポインターに変更 */
+            margin-bottom: 10px;
+            /* 質問の下の余白を設定 */
+        }
+
+        .faq dd {
+            margin-bottom: 20px;
+            /* 答えの下の余白を設定 */
+        }
+    </style>
+</head>
+<body>
+    <h1>Takahiro Kinoshita</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 400px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">About</td>
+            <td style="border: 1px solid black; text-align: center;">Details</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">founder</td>
+            <td style="border: 1px solid black;">30</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Occupation:</td>
+            <td style="border: 1px solid black;">Software Developer</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Location:</td>
+            <td style="border: 1px solid black;">New York City</td>
+        </tr>
+    </table>
+
+
+<!-- div class  -->
+    <div class="question">Q: これは質問ですか？</div>
+    <div class="answer">A: はい、これは答えです。</div>
+
+
+<!-- faq -->
+    <div class="faq">
+        <dl>
+            <dt> ソフトドリンク</dt>
+            <dd>一般の飲料</dd>
+            <dt> お酒</dt>
+            <dd>アルコール入り飲料</dd>
+            <dt> お酒</dt>
+            <dd>アルコール入り飲料</dd>
+            <dt> お酒</dt>
+            <dd>アルコール入り飲料</dd>
+            <dt> お酒</dt>
+            <dd>アルコール入り飲料</dd>
+        </dl>
+    </div>
+
+
+<!-- script記述 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(".faq dt").on("click", function () {
+                //ここに処理の中身を書く
+                $(this).next().slideToggle();
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
