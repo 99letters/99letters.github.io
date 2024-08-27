@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>design</title>
+    <style>
+        body {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 10px;
+            margin-left: 20px;
+            font-family: 'Times New Roman', serif;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .grid-item {
+            border: 1px solid #000;
+            transition: transform 0.2s ease;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>design</h1>
+    <div class="grid-container">
+        <div class="grid-item">
+            <a href="url1.html"><img src="image1.jpg" alt="プロジェクト1"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url2.html"><img src="image2.jpg" alt="プロジェクト2"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url3.html"><img src="image3.jpg" alt="プロジェクト3"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url4.html"><img src="image4.jpg" alt="プロジェクト4"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url5.html"><img src="image5.jpg" alt="プロジェクト5"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url6.html"><img src="image6.jpg" alt="プロジェクト6"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url7.html"><img src="image7.jpg" alt="プロジェクト7"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url8.html"><img src="image8.jpg" alt="プロジェクト8"></a>
+        </div>
+        <div class="grid-item">
+            <a href="url9.html"><img src="image9.jpg" alt="プロジェクト9"></a>
+        </div>
+    </div>
+</body>
+
+</html>
