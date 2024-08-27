@@ -21,7 +21,7 @@
     <meta name="twitter:image" content="https://example.com/img/ogp-image.jpg">
     
     <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -29,16 +29,15 @@
     <!-- End Google Tag Manager -->
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MWKNY7H1B9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWKNY7H1B9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-  gtag('config', 'G-MWKNY7H1B9');
-  <!-- Google tag (gtag.js) -->
-
-</script>
+        gtag('config', 'G-MWKNY7H1B9');
+        <!-- Google tag (gtag.js) -->
+    </script>
 
     <style>
         body {
@@ -58,33 +57,27 @@
             margin: 5px 0;
         }
 
-
         .faq {
             border: 2px solid #000;
-            /* 黒色の境界線を設定 */
             padding: 20px;
-            /* 内側の余白を設定 */
             margin: 20px 0;
-            /* 外側の上下の余白を設　ƒ定（左右は0） */
         }
 
         .faq dt {
             border: 2px solid #000;
             cursor: pointer;
-            /* マウスカーソルをポインターに変更 */
             margin-bottom: 10px;
-            /* 質問の下の余白を設定 */
         }
 
         .faq dd {
             margin-bottom: 20px;
-            /* 答えの下の余白を設定 */
         }
     </style>
 </head>
+
 <body>
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMCLRX6G"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMCLRX6G"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
@@ -176,4 +169,49 @@
         </tr>
         <tr>
             <td style="border: 1px solid black;">makafushigi/摩訶不思議</td>
-            <td
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/makafushigi">https://99letters.bandcamp.com/album/makafushigi</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">kaibou zukan/解剖図鑑</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/kaibou-zukan">https://99letters.bandcamp.com/album/kaibou-zukan</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">ibuki/息吹</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/ibuki">https://99letters.bandcamp.com/album/ibuki</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Drawing Days</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/drawing-days">https://99letters.bandcamp.com/album/drawing-days</a></td>
+        </tr>
+       
+    </table>
+    <h1>write</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 600px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">media</td>
+            <td style="border: 1px solid black; text-align: center;">about</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">note</td>
+            <td style="border: 1px solid black;"><a href="https://note.com/99letters/m/m36d5364dfa25">UI徒然日記</a></td>
+        </tr>
+        
+       
+    </table>
+
+<!-- script記述 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(".faq dt").on("click", function () {
+                //ここに処理の中身を書く
+                $(this).next().slideToggle();
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
