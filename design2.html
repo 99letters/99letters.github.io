@@ -1,91 +1,243 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>design</title>
-    <style>
-        body {
-            margin: 0 auto;
-            max-width: 800px;
-            padding: 10px;
-            margin-left: 20px;
-            font-family: 'Times New Roman', serif;
-            background-color: #ffffff;
-        }
+    <title>takahiro kinoshita</title>
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
+    <!-- OGP設定 -->
+    <meta property="og:title" content="takahiro kinoshita">
+    <meta property="og:description" content="Takahiro Kinoshita">
+    <meta property="og:image" content="https://example.com/img/ogp-image.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Takahiro Kinoshita Portfolio">
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+    <!-- Twitterカード設定 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="takahiro kinoshita">
+    <meta name="twitter:description" content="Takahiro Kinoshitaのポートフォリオサイト">
+    <meta name="twitter:image" content="https://example.com/img/ogp-image.jpg">
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WMCLRX6G');</script>
+    <!-- End Google Tag Manager -->
 
-        .grid-item {
-            border: 1px solid #000;
-            transition: transform 0.2s ease;
-        }
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MWKNY7H1B9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-        .grid-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        gtag('config', 'G-MWKNY7H1B9');
+        <!-- Google tag (gtag.js) -->
+    </script>
 
-        .grid-item:hover {
-            transform: scale(1.05);
-        }
+<style>
+    body {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 10px;
+        margin-left: 20px;
+        font-family: Times New Roman, serif;
+    }
 
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 6px; /* ここで下マージンを調整 */
+    }
 
-        @media (max-width: 480px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    p {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+    .faq {
+        border: 2px solid #000;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .faq dt {
+        border: 2px solid #000;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+
+    .faq dd {
+        margin-bottom: 20px;
+    }
+</style>
 </head>
 
 <body>
-    <h1>design</h1>
-    <div class="grid-container">
-        <div class="grid-item">
-            <a href="/design/studiologo.html"><img src="/img/studio.png" alt="Studio Kinoshita,ロゴ"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url2.html"><img src="/img/onzou.png" alt="プロジェクト2"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url3.html"><img src="/img/onlinecamera.png" alt="プロジェクト3"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url4.html"><img src="image4.jpg" alt="プロジェクト4"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url5.html"><img src="image5.jpg" alt="プロジェクト5"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url6.html"><img src="image6.jpg" alt="プロジェクト6"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url7.html"><img src="image7.jpg" alt="プロジェクト7"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url8.html"><img src="image8.jpg" alt="プロジェクト8"></a>
-        </div>
-        <div class="grid-item">
-            <a href="url9.html"><img src="image9.jpg" alt="プロジェクト9"></a>
-        </div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMCLRX6G"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <h1>takahiro kinoshita</h1>
+    <div style="display: flex; align-items: center;">
+        <span>Japan time:</span>
+        <p id="japan-time" style="margin-left: 10px;"></p>
     </div>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 400px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">About</td>
+            <td style="border: 1px solid black; text-align: center;">Details</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">founder</td>
+            <td style="border: 1px solid black;"><a href="https://kinoshitastudio.framer.website/" target="_blank">kinoshita Studio</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">direction</td>
+            <td style="border: 1px solid black;"><a href="https://twitter.com/ddddddddddont" target="_blank">idontknow</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">japan art design:</td>
+            <td style="border: 1px solid black;"><a href="https://twitter.com/makafushigie" target="_blank">makafushigi</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">occupation:</td>
+            <td style="border: 1px solid black;">software designer</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">location:</td>
+            <td style="border: 1px solid black;">japan</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">study</td>
+            <td style="border: 1px solid black;">learn software development</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">work</td>
+            <td style="border: 1px solid black;">big company in tokyo</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">awards</td>
+            <td style="border: 1px solid black;">a little bit about music activities</td>
+        </tr>
+    </table>
+
+    <h1>portfolio</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 400px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">link</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="/design.html">design</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="/photo.html">photo</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="/movie.html">movie</a></td>
+        </tr>
+    </table>
+
+    <h1>build ideas for experiences</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 500px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">link</td>
+            <td style="border: 1px solid black; text-align: center;">about</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="https://github.com/99letters/memo">https://github.com/99letters/memo</a></td>
+            <td style="border: 1px solid black;">figma memo app</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="https://github.com/99letters/Status">https://github.com/99letters/Status</a></td>
+            <td style="border: 1px solid black;">figma status app</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;"><a href="https://github.com/99letters/Text-sentiment-analysis">https://github.com/99letters/Text-sentiment-analysis</a></td>
+            <td style="border: 1px solid black;">API感情分析</td>
+        </tr>
+    </table>
+
+    <h1>music</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 600px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">release</td>
+            <td style="border: 1px solid black; text-align: center;">link</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">zigoku/地獄</td>
+            <td style="border: 1px solid black;"><a href="https:///99letters.bandcamp.com/album/zigoku">https://99letters.bandcamp.com/album/zigoku</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">makafushigi/摩訶不思議</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/makafushigi">https://99letters.bandcamp.com/album/makafushigi</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">kaibou zukan/解剖図鑑</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/kaibou-zukan">https://99letters.bandcamp.com/album/kaibou-zukan</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">ibuki/息吹</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/ibuki">https://99letters.bandcamp.com/album/ibuki</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Drawing Days</td>
+            <td style="border: 1px solid black;"><a href="https://99letters.bandcamp.com/album/drawing-days">https://99letters.bandcamp.com/album/drawing-days</a></td>
+        </tr>
+       
+    </table>
+    <h1>write</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 600px;">
+        <tr>
+            <td style="border: 1px solid black; text-align: center;">media</td>
+            <td style="border: 1px solid black; text-align: center;">about</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">note</td>
+            <td style="border: 1px solid black;"><a href="https://note.com/99letters/m/m36d5364dfa25">UI徒然日記</a></td>
+        </tr>
+        
+       
+    </table>
+
+    <h1>sns</h1>
+    <table style="border-collapse: collapse; border: 1px solid black; width: 600px;">
+        <tr>
+            <td style="border: 1px solid black;">twitter</td>
+            <td style="border: 1px solid black;"><a href="https://x.com/tkinoshita99">https://x.com/tkinoshita99</a></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">instagram</td>
+            <td style="border: 1px solid black;"><a href="https://www.instagram.com/tkinoshita99/">https://www.instagram.com/tkinoshita99/</a></td>
+        </tr>
+        
+       
+    </table>
+
+<!-- script記述 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $(".faq dt").on("click", function () {
+                //ここに処理の中身を書く
+                $(this).next().slideToggle();
+            });
+        });
+        function updateClock() {
+            var now = new Date();
+            var options = { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            var timeString = now.toLocaleTimeString('ja-JP', options);
+            document.getElementById('japan-time').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+
+    </script>
+
 </body>
 
 </html>

@@ -83,6 +83,10 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <h1>takahiro kinoshita</h1>
+    <div style="display: flex; align-items: center;">
+        <span>Japan time:</span>
+        <p id="japan-time" style="margin-left: 10px;"></p>
+    </div>
     <table style="border-collapse: collapse; border: 1px solid black; width: 400px;">
         <tr>
             <td style="border: 1px solid black; text-align: center;">About</td>
@@ -224,6 +228,13 @@
                 $(this).next().slideToggle();
             });
         });
+        function updateClock() {
+            var now = new Date();
+            var options = { timeZone: 'Asia/Tokyo', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            var timeString = now.toLocaleTimeString('ja-JP', options);
+            document.getElementById('japan-time').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
 
     </script>
 
