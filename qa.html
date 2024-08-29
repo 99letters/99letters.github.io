@@ -10,7 +10,6 @@
             margin: 0 auto;
             max-width: 800px;
             padding: 10px;
-            margin-left: 20px;
             font-family: Times New Roman, serif;
         }
 
@@ -23,39 +22,66 @@
             margin: 5px 0;
         }
 
-
         .faq {
             border: 2px solid #000;
-            /* 黒色の境界線を設定 */
             padding: 20px;
-            /* 内側の余白を設定 */
             margin: 20px 0;
-            /* 外側の上下の余白を設　ƒ定（左右は0） */
         }
 
         .faq dt {
             border: 2px solid #000;
             cursor: pointer;
-            /* マウスカーソルをポインターに変更 */
             margin-bottom: 10px;
-            /* 質問の下の余白を設定 */
         }
 
         .faq dd {
             margin-bottom: 20px;
-            /* 答えの下の余白を設定 */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                margin-left: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .faq {
+                padding: 15px;
+            }
+
+            .faq dt {
+                margin-bottom: 8px;
+            }
+
+            .faq dd {
+                margin-bottom: 15px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<!-- faq --><h1>q&a</h1>
+    <!-- faq -->
+    <h1>q&a</h1>
     <div class="faq">
         <dl>
             <dt>who am i</dt>
             <dd>I am a Japanese designer, and I am constantly researching how to create visual experiences for users by creating ideas. I have also been working as a producer for musicians as 99LETTERS for over 10 years. We work every day to synchronize music and video to create new experiences.</dd>
             <dt>face</dt>
-            <dd><img src="/img/me.png"</dd>
+            <dd><img src="/img/me.png"> <img src="/img/me2.png"></dd>
             <dt> お酒</dt>
             <dd>アルコール入り飲料</dd>
             <dt> お酒</dt>
@@ -65,19 +91,17 @@
         </dl>
     </div>
 
-<!-- script記述 -->
+    <!-- script記述 -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
         $(function () {
             $(".faq dt").on("click", function () {
-                //ここに処理の中身を書く
                 $(this).next().slideToggle();
             });
         });
-
     </script>
- <a href="index.html">back to top</a>
+    <a href="index.html">back to top</a>
 </body>
 
 </html>
