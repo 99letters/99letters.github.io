@@ -48,30 +48,6 @@
         font-family: Times New Roman, serif;
     }
 
-    header, footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-bottom: 1px solid #000;
-            border-top: 1px solid #000;
-        }
-
-        header a, footer a {
-            text-decoration: none;
-            color: #000;
-            margin: 0 10px;
-        }
-
-        header {
-            margin-bottom: 20px;
-        }
-
-        footer {
-            margin-top: 40px;
-        }
-
-
     h1 {
         font-size: 24px;
         margin-bottom: 6px; /* ここで下マージンを調整 */
@@ -105,16 +81,11 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMCLRX6G"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-<!-- ヘッダー -->
-<header>
-    <a href="#about">About</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#music">Music</a>
-    <a href="#write">Write</a>
-    <a href="#sns">SNS</a>
-</header>
 
-    <h1>takahiro kinoshita</h1>
+    <h1 style="display: flex; justify-content: space-between; align-items: center;">
+        takahiro kinoshita
+        <a href="#top" style="font-size: 10px; text-decoration: none;">back to top</a>
+    </h1>
     <div style="display: flex; align-items: center;">
         <span>Japan time:</span>
         <p id="japan-time" style="margin-left: 10px;"></p>
@@ -174,10 +145,13 @@
             <td style="border: 1px solid black;"><a href="/movie.html">movie</a></td>
         </tr>
         <tr>
+            <td style="border: 1px solid black;"><a href="/aiart.html">aiart</a></td>
+        </tr>
+        <tr>
             <td style="border: 1px solid black;"><a href="/qa.html">q&a</a></td>
         </tr>
         <tr>
-            <td style="border: 1px solid black;"><a href="/aiart.html">aiart</a></td>
+            <td style="border: 1px solid black;"><a href="https://99letters.notion.site/Takahiro-Kinoshita-55784d0aefd44222a5d657d951dbc157?pvs=25">resume</a></td>
         </tr>
     </table>
 
@@ -264,13 +238,7 @@
         
        
     </table>
-    <footer>
-        <a href="#about">About</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#music">Music</a>
-        <a href="#write">Write</a>
-        <a href="#sns">SNS</a>
-    </footer>
+
 <!-- script記述 -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
