@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care — SHIGA CRAFT</title>
+    <meta name="description" content="How to live with Shiga craft. A guide to materials that grow with time.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        .page-header {
+            padding: 180px 48px 80px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        /* --- intro --- */
+
+        .care-intro {
+            padding: 80px 48px 0;
+            max-width: 680px;
+        }
+
+        .care-intro p {
+            font-size: 0.95rem;
+            line-height: 2.4;
+            color: #bbb;
+            letter-spacing: var(--tracking-wide);
+        }
+
+        .care-intro p.ja {
+            font-family: var(--font-ja);
+            font-size: 0.85rem;
+            color: #888;
+            letter-spacing: 0.08em;
+            margin-top: 16px;
+            line-height: 2.5;
+        }
+
+        /* --- material nav --- */
+
+        .material-nav {
+            padding: 60px 48px 0;
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .material-tab {
+            font-size: 0.65rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: #555;
+            padding: 16px 24px 16px 0;
+            cursor: pointer;
+            border-bottom: 1px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.3s, border-color 0.3s;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            font-family: var(--font-en);
+        }
+
+        .material-tab:hover { color: #aaa; }
+
+        .material-tab.active {
+            color: var(--white);
+            border-bottom-color: var(--white);
+        }
+
+        /* --- material sections --- */
+
+        .material-section {
+            display: none;
+            padding: 80px 48px 120px;
+        }
+
+        .material-section.active { display: block; }
+
+        /* three-part layout */
+
+        .care-part {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 60px;
+            padding: 60px 0;
+            border-top: 1px solid #111;
+            max-width: 900px;
+        }
+
+        .care-part:first-child { border-top: none; padding-top: 0; }
+
+        .care-part-label {
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-top: 6px;
+        }
+
+        .care-part-label span {
+            display: block;
+            font-family: var(--font-ja);
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            text-transform: none;
+            color: #555;
+            margin-top: 6px;
+        }
+
+        .care-body-en {
+            font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+            line-height: 2.2;
+            color: #bbb;
+            letter-spacing: var(--tracking-wide);
+            margin-bottom: 24px;
+        }
+
+        .care-body-ja {
+            font-family: var(--font-ja);
+            font-size: 0.85rem;
+            line-height: 2.6;
+            color: #666;
+            letter-spacing: 0.06em;
+        }
+
+        /* material title */
+
+        .material-title {
+            margin-bottom: 64px;
+        }
+
+        .material-title h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .material-title-ja {
+            font-family: var(--font-ja);
+            font-size: 1rem;
+            color: #555;
+            letter-spacing: 0.12em;
+        }
+
+        .material-title-origin {
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        /* closing line */
+        .care-closing {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #111;
+            max-width: 900px;
+        }
+
+        .care-closing p {
+            font-size: 0.75rem;
+            letter-spacing: var(--tracking-wide);
+            color: #444;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            .page-header { padding: 140px 24px 60px; }
+            .care-intro { padding: 60px 24px 0; }
+            .material-nav { padding: 40px 24px 0; gap: 0; flex-wrap: wrap; }
+            .material-tab { padding: 12px 16px 12px 0; }
+            .material-section { padding: 60px 24px 80px; }
+            .care-part { grid-template-columns: 1fr; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">Shiga Craft</a>
+        <ul class="nav-links">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html" style="opacity:1;">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header fade-in">
+        <div class="section-label">Care</div>
+        <h1>Living with<br>the object.</h1>
+        <p class="ja" style="font-family:var(--font-ja); font-size:0.95rem; color:#888; letter-spacing:0.1em; margin-top:12px;">
+            工芸品との、長い付き合いのために。
+        </p>
+    </div>
+
+    <div class="care-intro fade-in">
+        <p>
+            These objects are not finished when they leave the kiln.<br>
+            They continue to change — with light, with water, with the heat of your hands.
+        </p>
+        <p class="ja">
+            この器は、窯を出た時点では完成していない。<br>
+            光と水と、あなたの手の熱によって、これからも変わり続ける。
+        </p>
+    </div>
+
+    <!-- material tabs -->
+    <div class="material-nav">
+        <button class="material-tab active" onclick="showMaterial(this, 'ceramic')">Ceramic</button>
+        <button class="material-tab" onclick="showMaterial(this, 'lacquer')">Lacquer</button>
+        <button class="material-tab" onclick="showMaterial(this, 'textile')">Textile</button>
+        <button class="material-tab" onclick="showMaterial(this, 'paper')">Paper</button>
+    </div>
+
+    <!-- ceramic -->
+    <div class="material-section active" id="care-ceramic">
+
+        <div class="material-title fade-in">
+            <p class="material-title-origin">Shigaraki, Shiga</p>
+            <h2>Ceramic</h2>
+            <p class="material-title-ja ja">信楽焼</p>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Character
+                <span>素材の性格</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Shigaraki clay holds the memory of fire.<br>
+                    Born at 1,300 degrees, it carries the marks of ash and flame —<br>
+                    colors that no glaze could predict, no hand could plan.<br>
+                    This is not imperfection. This is its nature.
+                </p>
+                <p class="care-body-ja ja">
+                    信楽の土は、火の記憶を持っている。<br>
+                    千三百度の中で生まれ、灰と炎の痕跡を纏う——<br>
+                    どんな釉薬も予測できない色、どんな手も計画できない形。<br>
+                    これは欠点ではない。これが、この土の性格だ。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                With Time
+                <span>時間との関係</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    At first, Shigaraki resists the hand. The surface is rough,<br>
+                    the color unchanged. Give it years.<br>
+                    The oils from your palms will settle into the clay.<br>
+                    The rough becomes smooth where you hold it most.<br>
+                    The vessel remembers you.
+                </p>
+                <p class="care-body-ja ja">
+                    最初、信楽はあなたの手を拒む。表面は粗く、色は変わらない。<br>
+                    数年を与えよ。<br>
+                    手のひらの脂が、少しずつ土に沁み込んでいく。<br>
+                    最もよく触れる場所から、粗さが消えていく。<br>
+                    この器は、あなたを覚える。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Living with It
+                <span>付き合い方</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Water is fine. Soap, if needed, in small amounts.<br>
+                    Not the dishwasher — the heat is too even, too mechanical.<br>
+                    Dry in air, not cloth. Let the surface breathe.<br>
+                    If it chips at the edge, that too is a record of use.<br>
+                    Nothing is broken. Everything is lived-in.
+                </p>
+                <p class="care-body-ja ja">
+                    水は問題ない。必要なら、少量の洗剤も。<br>
+                    食洗機は使わない——熱が均一すぎる、機械的すぎる。<br>
+                    布ではなく、空気で乾かす。表面に呼吸させる。<br>
+                    縁が欠けたなら、それも使用の記録だ。<br>
+                    壊れたのではない。生きてきた痕跡だ。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-closing">
+            <p>Shigaraki ware made by Kenji Mori — Koka, Shiga / 信楽焼・森健二作</p>
+        </div>
+    </div>
+
+    <!-- lacquer -->
+    <div class="material-section" id="care-lacquer">
+
+        <div class="material-title fade-in">
+            <p class="material-title-origin">Hikone, Shiga</p>
+            <h2>Lacquer</h2>
+            <p class="material-title-ja ja">彦根漆器</p>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Character
+                <span>素材の性格</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Urushi is paradoxical.<br>
+                    It dries only in darkness and humidity — not in light, not in dryness.<br>
+                    A material that demands patience from the moment of its making.<br>
+                    That patience lives inside every finished surface.
+                </p>
+                <p class="care-body-ja ja">
+                    漆は逆説的な素材だ。<br>
+                    乾くのは、暗くて湿った場所だけ——光の中では乾かない、乾燥では固まらない。<br>
+                    作られる瞬間から、忍耐を要求する素材。<br>
+                    その忍耐が、仕上がった表面の中に生きている。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                With Time
+                <span>時間との関係</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    New lacquer is dark and uniform.<br>
+                    After years of use, it begins to reveal depth —<br>
+                    layers of color built up over decades of application,<br>
+                    now visible as the surface wears gently with contact.<br>
+                    The more you use it, the more it shows you.
+                </p>
+                <p class="care-body-ja ja">
+                    新しい漆は、暗く均一だ。<br>
+                    数年の使用を経て、深みが現れ始める——<br>
+                    何十年もかけて重ねられた色の層が、<br>
+                    使用による微かな摩耗とともに顔を出す。<br>
+                    使うほど、この器はあなたに見せるものが増える。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Living with It
+                <span>付き合い方</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Warm water. A soft cloth. Nothing abrasive, nothing acidic.<br>
+                    Not the microwave. Not the dishwasher.<br>
+                    Lacquer prefers slow temperature changes —<br>
+                    the same patience it demanded during making.<br>
+                    Store away from direct light. Let it rest between uses.
+                </p>
+                <p class="care-body-ja ja">
+                    ぬるま湯と、柔らかい布。研磨剤も酸も使わない。<br>
+                    電子レンジも、食洗機も使わない。<br>
+                    漆は、緩やかな温度変化を好む——<br>
+                    作られる時に要求したのと同じ、忍耐だ。<br>
+                    直射日光を避けて保管する。使わない時間にも、休ませる。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-closing">
+            <p>Hikone lacquerware made by Yuki Tanaka — Hikone, Shiga / 彦根漆器・田中雪作</p>
+        </div>
+    </div>
+
+    <!-- textile -->
+    <div class="material-section" id="care-textile">
+
+        <div class="material-title fade-in">
+            <p class="material-title-origin">Omi-Hachiman, Shiga</p>
+            <h2>Textile</h2>
+            <p class="material-title-ja ja">近江上布</p>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Character
+                <span>素材の性格</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Omi linen is woven from hemp grown beside the lake.<br>
+                    It is stiff at first — almost resistant.<br>
+                    This stiffness is not a flaw. It is the memory of the plant,<br>
+                    still present in the fiber. It will soften. It takes time.
+                </p>
+                <p class="care-body-ja ja">
+                    近江上布は、琵琶湖のほとりで育った麻から織られる。<br>
+                    最初は硬い——ほとんど拒絶するように。<br>
+                    この硬さは欠点ではない。植物の記憶が、<br>
+                    繊維の中にまだ生きている証だ。柔らかくなる。時間がかかるだけだ。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                With Time
+                <span>時間との関係</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Linen softens with every wash.<br>
+                    The weave stays tight, but the hand grows gentle over years.<br>
+                    It also creases — deeply, confidently, in ways that show it was used.<br>
+                    These creases are not disorder. They are proof that something lived here.
+                </p>
+                <p class="care-body-ja ja">
+                    麻は洗うたびに柔らかくなる。<br>
+                    織り目は固く保たれるが、手触りは年を経るごとに穏やかになる。<br>
+                    深く、確信を持って皺が刻まれる——使われたことを示す皺が。<br>
+                    この皺は乱れではない。何かがここで生きた証明だ。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Living with It
+                <span>付き合い方</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Cold or warm water. Gentle motion, not force.<br>
+                    No bleach — it strips the fiber of its character.<br>
+                    Dry in shade, not sunlight. Linen fades evenly in the sun,<br>
+                    but shade-drying keeps the color honest.<br>
+                    Iron while slightly damp, or leave the creases. Both are correct.
+                </p>
+                <p class="care-body-ja ja">
+                    冷水またはぬるま湯。力ではなく、やさしい動作で。<br>
+                    漂白剤は使わない——繊維の性格を奪う。<br>
+                    日光ではなく日陰で乾かす。麻は日光で均等に色が抜けるが、<br>
+                    日陰干しは色を正直に保つ。<br>
+                    少し湿った状態でアイロンをかけるか、皺のまま使うか。どちらも正しい。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-closing">
+            <p>Omi linen woven by Haruka Nishida — Omi-Hachiman, Shiga / 近江上布・西田遥作</p>
+        </div>
+    </div>
+
+    <!-- paper -->
+    <div class="material-section" id="care-paper">
+
+        <div class="material-title fade-in">
+            <p class="material-title-origin">Koka, Shiga</p>
+            <h2>Paper</h2>
+            <p class="material-title-ja ja">甲賀和紙</p>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Character
+                <span>素材の性格</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Washi holds the memory of water.<br>
+                    Every sheet passed through the hands of water before it became paper —<br>
+                    fibers suspended, then settled, then dried into stillness.<br>
+                    The surface carries that process: irregular, human, alive.
+                </p>
+                <p class="care-body-ja ja">
+                    和紙は水の記憶を持っている。<br>
+                    紙になる前に、すべての一枚が水の手を通り抜けた——<br>
+                    繊維が浮かび、沈み、静けさの中で乾いた。<br>
+                    その過程が表面に刻まれている。不均一で、人間的で、生きている。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                With Time
+                <span>時間との関係</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Washi does not yellow the way machine-made paper does.<br>
+                    It ages toward warmth — a deeper cream, a richer tone.<br>
+                    Kept away from light, it holds its color for centuries.<br>
+                    Exposed to use, it softens at the edges. Both are beautiful.
+                </p>
+                <p class="care-body-ja ja">
+                    和紙は、機械製の紙のように黄ばまない。<br>
+                    温かみに向かって老いていく——より深いクリーム色、より豊かな色調へ。<br>
+                    光を避けて保管すれば、数百年その色を保つ。<br>
+                    使われれば、縁から柔らかくなる。どちらも美しい。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-part fade-in">
+            <div class="care-part-label">
+                Living with It
+                <span>付き合い方</span>
+            </div>
+            <div>
+                <p class="care-body-en">
+                    Keep away from moisture and direct light.<br>
+                    Not because it is fragile — washi is stronger than it looks —<br>
+                    but because sustained exposure flattens its character over time.<br>
+                    Handle with clean, dry hands. The oils from fingers leave marks.<br>
+                    Those marks, too, are part of its history.
+                </p>
+                <p class="care-body-ja ja">
+                    湿気と直射日光を避けて保管する。<br>
+                    和紙が脆いからではない——見た目より遥かに強い——<br>
+                    継続的な暴露が、時間をかけてその性格を平らにするからだ。<br>
+                    清潔で乾いた手で扱う。指の脂は痕跡を残す。<br>
+                    その痕跡もまた、この紙の歴史の一部だ。
+                </p>
+            </div>
+        </div>
+
+        <div class="care-closing">
+            <p>Koka washi made by Sota Izumi — Koka, Shiga / 甲賀和紙・和泉颯太作</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <span class="footer-brand">Shiga Craft</span>
+            <span class="footer-copy">© 2025 Shiga Craft. Produced by kinoshita studio.</span>
+        </div>
+        <ul class="footer-nav">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        function showMaterial(btn, id) {
+            document.querySelectorAll('.material-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.material-section').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('care-' + id).classList.add('active');
+        }
+
+        const targets = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        targets.forEach(t => observer.observe(t));
+    </script>
+
+</body>
+</html>

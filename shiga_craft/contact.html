@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — SHIGA CRAFT</title>
+    <meta name="description" content="Inquiries, stockist requests, and collaborations.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* --- layout --- */
+
+        .contact-wrapper {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* --- left panel --- */
+
+        .contact-left {
+            padding: 160px 60px 80px 48px;
+            border-right: 1px solid #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-left h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 40px;
+        }
+
+        .contact-left .lead-en {
+            font-size: 0.88rem;
+            letter-spacing: var(--tracking-wide);
+            color: #bbb;
+            line-height: 2.3;
+            max-width: 380px;
+            margin-bottom: 16px;
+        }
+
+        .contact-left .lead-ja {
+            font-family: var(--font-ja);
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            color: #999;
+            line-height: 2.3;
+            max-width: 340px;
+        }
+
+        .contact-info {
+            margin-top: auto;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .contact-info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .contact-info-label {
+            font-size: 0.55rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .contact-info-value {
+            font-size: 0.82rem;
+            letter-spacing: var(--tracking-wide);
+            color: #aaa;
+        }
+
+        .contact-info-value a {
+            color: #aaa;
+            border-bottom: 1px solid #555;
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .contact-info-value a:hover {
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        /* --- right panel (form) --- */
+
+        .contact-right {
+            padding: 160px 48px 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-section-label {
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 48px;
+        }
+
+        .form-group {
+            margin-bottom: 36px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #2a2a2a;
+            color: var(--white);
+            font-family: var(--font-en);
+            font-size: 0.85rem;
+            letter-spacing: var(--tracking-wide);
+            padding: 10px 0;
+            outline: none;
+            transition: border-color 0.3s;
+            appearance: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: var(--white);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #333;
+        }
+
+        .form-select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23444'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 4px center;
+            padding-right: 20px;
+        }
+
+        .form-select option {
+            background: #0a0a0a;
+            color: var(--white);
+        }
+
+        .form-textarea {
+            resize: none;
+            height: 100px;
+            line-height: 1.8;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        /* submit */
+        .form-submit {
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .submit-btn {
+            font-family: var(--font-en);
+            font-size: 0.7rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--black);
+            background: var(--white);
+            border: none;
+            padding: 14px 40px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .form-note {
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wide);
+            color: #777;
+            line-height: 1.8;
+        }
+
+        /* sent state */
+        .form-sent {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .form-sent p {
+            font-size: 0.88rem;
+            letter-spacing: var(--tracking-wide);
+            color: #bbb;
+            line-height: 2;
+        }
+
+        .form-sent p.ja {
+            font-family: var(--font-ja);
+            font-size: 0.82rem;
+            color: #999;
+            letter-spacing: 0.08em;
+            margin-top: 12px;
+        }
+
+        /* --- responsive --- */
+
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .contact-left {
+                border-right: none;
+                border-bottom: 1px solid #1a1a1a;
+                padding: 140px 24px 60px;
+            }
+            .contact-right {
+                padding: 60px 24px 80px;
+            }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- nav -->
+    <nav>
+        <a href="index.html" class="nav-logo">Shiga Craft</a>
+        <ul class="nav-links">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" style="opacity:1;">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="contact-wrapper">
+
+        <!-- left -->
+        <div class="contact-left fade-in">
+            <div>
+                <div class="section-label" style="margin-bottom:32px;">Contact</div>
+                <h1>Let's<br>talk.</h1>
+                <p class="lead-en">
+                    For stockist inquiries, press requests,
+                    collaborations, or simply to ask about a piece —
+                    we respond to every message.
+                    English inquiries welcome.
+                </p>
+                <p class="lead-ja ja">
+                    取り扱い、プレス、コラボレーション、<br>
+                    作品についての問い合わせ、何でも。<br>
+                    すべてのメッセージに返信します。
+                </p>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-info-row">
+                    <span class="contact-info-label">Email</span>
+                    <span class="contact-info-value">
+                        <a href="mailto:hello@shigacraft.jp">hello@shigacraft.jp</a>
+                    </span>
+                </div>
+                <div class="contact-info-row">
+                    <span class="contact-info-label">Location</span>
+                    <span class="contact-info-value">Shiga, Japan</span>
+                </div>
+                <div class="contact-info-row">
+                    <span class="contact-info-label">Response</span>
+                    <span class="contact-info-value">Within 3 business days</span>
+                </div>
+                <div class="contact-info-row">
+                    <span class="contact-info-label">Produced by</span>
+                    <span class="contact-info-value">
+                        <a href="https://kinoshitastudio.github.io" target="_blank">kinoshita studio</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- right: form -->
+        <div class="contact-right fade-in" style="transition-delay:0.15s;">
+            <p class="form-section-label">Inquiry Form</p>
+
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name</label>
+                        <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="type">Type of inquiry</label>
+                    <select class="form-select" id="type" name="type">
+                        <option value="">— Select —</option>
+                        <option value="stockist">Stockist / 取り扱い</option>
+                        <option value="press">Press / メディア</option>
+                        <option value="collaboration">Collaboration</option>
+                        <option value="purchase">Purchase inquiry / 購入</option>
+                        <option value="other">Other / その他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="message">Message</label>
+                    <textarea class="form-textarea" id="message" name="message" placeholder="Your message..." required></textarea>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" class="submit-btn">Send →</button>
+                    <p class="form-note">
+                        This form is a prototype.<br>
+                        No data is transmitted.
+                    </p>
+                </div>
+
+            </form>
+
+            <div class="form-sent" id="formSent">
+                <p>Message received.</p>
+                <p class="ja">受け取りました。3営業日以内に返信します。</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-left">
+            <span class="footer-brand">Shiga Craft</span>
+            <span class="footer-copy">© 2025 Shiga Craft. Produced by kinoshita studio.</span>
+        </div>
+        <ul class="footer-nav">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('formSent').style.display = 'block';
+        }
+
+        const targets = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(el => {
+                if (el.isIntersecting) {
+                    el.target.classList.add('visible');
+                    observer.unobserve(el.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        targets.forEach(t => observer.observe(t));
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHIGA CRAFT — Made in Silence</title>
+    <meta name="description" content="Craftsmanship from the shores of Lake Biwa. Made in silence.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- nav -->
+    <nav>
+        <span class="nav-logo">Shiga Craft</span>
+        <ul class="nav-links">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- hero -->
+    <section class="hero">
+        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1920&q=80'); background-size:cover; background-position:center;"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Lake Biwa, Shiga — Japan</p>
+            <h1 class="hero-title">Made in<br>Silence.</h1>
+            <p class="hero-title-ja ja">静けさの中で、手が形をつくる。</p>
+            <p class="hero-sub">
+                Craft born from centuries of stillness.<br>
+                From the shores of Lake Biwa to the world.
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>scroll</span>
+        </div>
+    </section>
+
+    <!-- concept statement -->
+    <section>
+        <div class="section-label">Concept</div>
+        <div class="concept fade-in">
+            <p class="concept-text-en">
+                There is a kind of making<br>
+                that cannot be rushed.
+            </p>
+            <p class="concept-text-ja ja">
+                急ぐことのできない、つくりかたがある。<br>
+                琵琶湖の岸で、職人は今日も静かに手を動かす。<br>
+                その沈黙が、形になる。
+            </p>
+        </div>
+    </section>
+
+    <!-- featured works -->
+    <section style="padding-top: 0;">
+        <div class="section-label">Featured Works</div>
+        <div class="works-grid">
+
+            <div class="work-item fade-in">
+                <div class="work-img-placeholder">
+                    <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80" alt="Shigaraki ceramic vessel">
+                </div>
+                <div class="work-info">
+                    <p class="work-material">Ceramic / 陶器</p>
+                    <p class="work-name">Shigaraki Vessel</p>
+                    <p class="work-name-ja ja">信楽焼 — 壺</p>
+                </div>
+            </div>
+
+            <div class="work-item fade-in" style="transition-delay: 0.15s;">
+                <div class="work-img-placeholder">
+                    <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=800&q=80" alt="Urushi lacquer tray">
+                </div>
+                <div class="work-info">
+                    <p class="work-material">Lacquer / 漆</p>
+                    <p class="work-name">Urushi Tray</p>
+                    <p class="work-name-ja ja">彦根漆器 — 盆</p>
+                </div>
+            </div>
+
+            <div class="work-item fade-in" style="transition-delay: 0.3s;">
+                <div class="work-img-placeholder">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80" alt="Omi linen textile">
+                </div>
+                <div class="work-info">
+                    <p class="work-material">Textile / 織物</p>
+                    <p class="work-name">Omi Linen</p>
+                    <p class="work-name-ja ja">近江上布 — 反物</p>
+                </div>
+            </div>
+
+        </div>
+        <div style="margin-top: 40px; padding: 0 0;">
+            <a href="works.html" style="font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase; color:#999; border-bottom: 1px solid #555; padding-bottom: 4px;">
+                View All Works →
+            </a>
+        </div>
+    </section>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-left">
+            <span class="footer-brand">Shiga Craft</span>
+            <span class="footer-copy">© 2025 Shiga Craft. Produced by kinoshita studio.</span>
+        </div>
+        <ul class="footer-nav">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // scroll fade-in
+        const targets = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        targets.forEach(t => observer.observe(t));
+    </script>
+
+</body>
+</html>

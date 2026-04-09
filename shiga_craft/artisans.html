@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisans — SHIGA CRAFT</title>
+    <meta name="description" content="The hands behind the silence. Craftspeople of Shiga.">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* --- page header --- */
+
+        .page-header {
+            padding: 180px 48px 80px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        /* --- intro --- */
+
+        .artisans-intro {
+            padding: 80px 48px 60px;
+            max-width: 640px;
+        }
+
+        .artisans-intro p {
+            font-size: 0.9rem;
+            line-height: 2.3;
+            color: #bbb;
+            letter-spacing: var(--tracking-wide);
+        }
+
+        .artisans-intro p + p {
+            margin-top: 20px;
+            font-family: var(--font-ja);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* --- artisan list --- */
+
+        .artisan-list {
+            padding: 0 48px 120px;
+        }
+
+        .artisan-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 2px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .artisan-item:nth-child(even) .artisan-photo {
+            order: 2;
+        }
+
+        .artisan-item:nth-child(even) .artisan-body {
+            order: 1;
+        }
+
+        .artisan-photo {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            background: #111;
+        }
+
+        .artisan-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(50%);
+            transition: filter 0.6s, transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .artisan-item:hover .artisan-photo img {
+            filter: grayscale(10%);
+            transform: scale(1.03);
+        }
+
+        .artisan-photo-num {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            color: var(--accent);
+        }
+
+        .artisan-body {
+            padding: 60px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #0d0d0d;
+        }
+
+        .artisan-craft {
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .artisan-name-en {
+            font-size: clamp(1.6rem, 3vw, 2.6rem);
+            letter-spacing: var(--tracking-wide);
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .artisan-name-ja {
+            font-family: var(--font-ja);
+            font-size: 1rem;
+            letter-spacing: 0.12em;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+
+        .artisan-quote-en {
+            font-size: 0.88rem;
+            letter-spacing: var(--tracking-wide);
+            color: #bbb;
+            line-height: 2.1;
+            font-style: italic;
+            margin-bottom: 20px;
+            border-left: 1px solid #333;
+            padding-left: 20px;
+        }
+
+        .artisan-quote-ja {
+            font-family: var(--font-ja);
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            color: #999;
+            line-height: 2.3;
+            padding-left: 20px;
+        }
+
+        .artisan-meta {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .artisan-meta-row {
+            display: flex;
+            gap: 24px;
+            font-size: 0.6rem;
+            letter-spacing: var(--tracking-wider);
+            text-transform: uppercase;
+        }
+
+        .artisan-meta-label {
+            color: #666;
+            width: 64px;
+            flex-shrink: 0;
+        }
+
+        .artisan-meta-value {
+            color: #aaa;
+        }
+
+        /* --- closing statement --- */
+
+        .closing {
+            padding: 100px 48px;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+        }
+
+        .closing p {
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            letter-spacing: var(--tracking-wide);
+            color: #888;
+            line-height: 1.8;
+        }
+
+        .closing p span {
+            color: var(--white);
+        }
+
+        /* --- responsive --- */
+
+        @media (max-width: 768px) {
+            .page-header { padding: 140px 24px 60px; }
+            .artisans-intro { padding: 60px 24px 40px; }
+            .artisan-list { padding: 0 0 80px; }
+            .artisan-item { grid-template-columns: 1fr; }
+            .artisan-item:nth-child(even) .artisan-photo { order: 0; }
+            .artisan-item:nth-child(even) .artisan-body { order: 0; }
+            .artisan-photo { aspect-ratio: 3/2; }
+            .artisan-body { padding: 40px 24px; }
+            .closing { padding: 80px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- nav -->
+    <nav>
+        <a href="index.html" class="nav-logo">Shiga Craft</a>
+        <ul class="nav-links">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html" style="opacity:1;">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- page header -->
+    <div class="page-header fade-in">
+        <div class="section-label">Artisans</div>
+        <h1>The Hands.</h1>
+        <p class="ja" style="font-family: var(--font-ja); font-size:0.95rem; color:#aaa; letter-spacing:0.1em; margin-top:12px;">
+            形をつくる、手がある。
+        </p>
+    </div>
+
+    <!-- intro -->
+    <div class="artisans-intro fade-in">
+        <p>
+            Every object carries the silence of its maker.<br>
+            These are the people who have given their lives to one thing.
+        </p>
+        <p>
+            ひとつのことに、生涯を捧げた人たちがいる。<br>
+            その手から生まれたものだけが、時間に耐える。
+        </p>
+    </div>
+
+    <!-- artisan list -->
+    <div class="artisan-list">
+
+        <!-- 01 -->
+        <div class="artisan-item fade-in">
+            <div class="artisan-photo">
+                <span class="artisan-photo-num">01</span>
+                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=80" alt="Kenji Mori — ceramics">
+            </div>
+            <div class="artisan-body">
+                <p class="artisan-craft">Ceramic / 信楽焼</p>
+                <h2 class="artisan-name-en">Kenji Mori</h2>
+                <p class="artisan-name-ja ja">森 健二</p>
+                <p class="artisan-quote-en">
+                    "I don't make pottery.<br>
+                    I listen to the clay."
+                </p>
+                <p class="artisan-quote-ja ja">
+                    土を作るのではない。<br>
+                    土の声を聞いている。
+                </p>
+                <div class="artisan-meta">
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Location</span>
+                        <span class="artisan-meta-value">Koka, Shiga</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Since</span>
+                        <span class="artisan-meta-value">1987</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Craft</span>
+                        <span class="artisan-meta-value">Shigaraki ware</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 02 -->
+        <div class="artisan-item fade-in">
+            <div class="artisan-photo">
+                <span class="artisan-photo-num">02</span>
+                <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=80" alt="Yuki Tanaka — lacquer">
+            </div>
+            <div class="artisan-body">
+                <p class="artisan-craft">Lacquer / 彦根漆器</p>
+                <h2 class="artisan-name-en">Yuki Tanaka</h2>
+                <p class="artisan-name-ja ja">田中 雪</p>
+                <p class="artisan-quote-en">
+                    "Urushi demands patience.<br>
+                    It dries only in darkness."
+                </p>
+                <p class="artisan-quote-ja ja">
+                    漆は待つことを要求する。<br>
+                    闇の中でしか、乾かない。
+                </p>
+                <div class="artisan-meta">
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Location</span>
+                        <span class="artisan-meta-value">Hikone, Shiga</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Since</span>
+                        <span class="artisan-meta-value">2001</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Craft</span>
+                        <span class="artisan-meta-value">Hikone lacquerware</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 03 -->
+        <div class="artisan-item fade-in">
+            <div class="artisan-photo">
+                <span class="artisan-photo-num">03</span>
+                <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=900&q=80" alt="Haruka Nishida — textile">
+            </div>
+            <div class="artisan-body">
+                <p class="artisan-craft">Textile / 近江上布</p>
+                <h2 class="artisan-name-en">Haruka Nishida</h2>
+                <p class="artisan-name-ja ja">西田 遥</p>
+                <p class="artisan-quote-en">
+                    "The loom is just a tool.<br>
+                    The breath is the weave."
+                </p>
+                <p class="artisan-quote-ja ja">
+                    機は道具に過ぎない。<br>
+                    息が、布になる。
+                </p>
+                <div class="artisan-meta">
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Location</span>
+                        <span class="artisan-meta-value">Omi-Hachiman, Shiga</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Since</span>
+                        <span class="artisan-meta-value">1994</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Craft</span>
+                        <span class="artisan-meta-value">Omi linen weaving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 04 -->
+        <div class="artisan-item fade-in">
+            <div class="artisan-photo">
+                <span class="artisan-photo-num">04</span>
+                <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=80" alt="Sota Izumi — washi paper">
+            </div>
+            <div class="artisan-body">
+                <p class="artisan-craft">Paper / 甲賀和紙</p>
+                <h2 class="artisan-name-en">Sota Izumi</h2>
+                <p class="artisan-name-ja ja">和泉 颯太</p>
+                <p class="artisan-quote-en">
+                    "Paper remembers water.<br>
+                    Every sheet holds the river."
+                </p>
+                <p class="artisan-quote-ja ja">
+                    紙は水を覚えている。<br>
+                    一枚の中に、川が宿る。
+                </p>
+                <div class="artisan-meta">
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Location</span>
+                        <span class="artisan-meta-value">Koka, Shiga</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Since</span>
+                        <span class="artisan-meta-value">2009</span>
+                    </div>
+                    <div class="artisan-meta-row">
+                        <span class="artisan-meta-label">Craft</span>
+                        <span class="artisan-meta-value">Koka washi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- closing statement -->
+    <div class="closing fade-in">
+        <p>
+            <span>Silence is not empty.</span><br>
+            It is where the work begins.
+        </p>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div class="footer-left">
+            <span class="footer-brand">Shiga Craft</span>
+            <span class="footer-copy">© 2025 Shiga Craft. Produced by kinoshita studio.</span>
+        </div>
+        <ul class="footer-nav">
+            <li><a href="works.html">Works</a></li>
+            <li><a href="artisans.html">Artisans</a></li>
+            <li><a href="care.html">Care</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        const targets = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        targets.forEach(t => observer.observe(t));
+    </script>
+
+</body>
+</html>
