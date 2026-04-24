@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KINOSHITA STUDIO — プロダクト一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #FAF8F4;
+  --bg-warm: #F3EEE4;
+  --card: #FFFFFF;
+  --ink: #2C2A26;
+  --ink-soft: #6E6A62;
+  --ink-faint: #A8A39A;
+  --line: #E8E3D9;
+  --line-soft: #F0ECE3;
+  --green: #5B7F61;
+  --green-soft: #E7EEE3;
+  --peach: #E8B69A;
+  --peach-soft: #FBEADC;
+  --blue-soft: #E7EFF5;
+  --yellow-soft: #FAF1D4;
+  --orange: #B67A5A;
+}
+html { scroll-behavior: smooth; touch-action: manipulation; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  font-feature-settings: 'palt' 1, 'kern' 1;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 0 80px;
+}
+code, .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+
+header {
+  max-width: 1200px; margin: 0 auto;
+  padding: 56px 24px 32px;
+}
+.eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--green);
+  background: var(--green-soft);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+h1 em { font-style: normal; background: linear-gradient(180deg, transparent 65%, var(--yellow-soft) 65%); padding: 0 4px; }
+.lead {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+/* ─ Env status bar ─ */
+.env-bar {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.env-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 4px;
+  position: relative;
+}
+.env-title {
+  font-size: 10px; font-weight: 700;
+  color: var(--ink-faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 5px;
+}
+.env-title .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-faint); }
+.env-card.local .dot    { background: #5B7F61; }
+.env-card.lan .dot      { background: #9AB4CC; }
+.env-card.tunnel .dot   { background: #E8B69A; }
+.env-card.prod .dot     { background: #D4A04A; animation: blink 2s ease-in-out infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.env-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 600;
+  color: var(--ink);
+  word-break: break-all;
+}
+.env-note { font-size: 10.5px; color: var(--ink-soft); }
+
+/* ─ Toolbar ─ */
+.toolbar {
+  max-width: 1200px;
+  margin: 28px auto 16px;
+  padding: 0 24px;
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.search {
+  flex: 1 1 240px;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  font-family: inherit; font-size: 14px;
+  outline: none;
+  background: var(--card);
+  color: var(--ink);
+  transition: border-color .15s;
+}
+.search:focus { border-color: var(--ink); }
+.env-toggle {
+  display: inline-flex; gap: 4px;
+  background: var(--bg-warm);
+  padding: 4px;
+  border-radius: 10px;
+}
+.env-toggle button {
+  font-family: inherit; font-size: 12px; font-weight: 600;
+  padding: 7px 12px;
+  border: none; background: none;
+  color: var(--ink-soft);
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.env-toggle button.active {
+  background: var(--ink); color: #fff;
+}
+.count {
+  font-size: 13px; color: var(--ink-soft);
+  font-weight: 500;
+  margin-left: auto;
+}
+
+/* ─ Grid ─ */
+.grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 20px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(44,42,38,0.08);
+}
+.card-head {
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.card-emoji {
+  font-size: 28px; line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.card-title-wrap { flex: 1; min-width: 0; }
+.card-title {
+  font-size: 16px; font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  word-break: break-word;
+}
+.card-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--ink-soft);
+  font-weight: 500;
+}
+.card-desc {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  min-height: 2.6em;
+}
+
+.url-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 10px;
+  background: var(--bg);
+  border: 1px solid var(--line-soft);
+  border-radius: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--ink);
+  transition: all .15s;
+  text-decoration: none;
+  min-height: 32px;
+}
+.url-row:hover {
+  border-color: var(--ink);
+  background: var(--bg-warm);
+}
+.url-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+}
+.url-label.local    { background: #E7EEE3; color: #5B7F61; }
+.url-label.lan      { background: #E7EFF5; color: #5B7899; }
+.url-label.tunnel   { background: #FBEADC; color: #B67A5A; }
+.url-label.prod     { background: #FAF1D4; color: #A58F3A; }
+.url-path {
+  flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  color: var(--ink-soft);
+}
+.url-copy {
+  background: none; border: none;
+  font-size: 13px; cursor: pointer;
+  color: var(--ink-faint);
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: all .15s;
+  font-family: inherit;
+}
+.url-copy:hover { color: var(--ink); background: rgba(0,0,0,0.05); }
+.url-copy.copied { color: var(--green); }
+
+.urls {
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+.tag {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-faint);
+  background: var(--bg-warm);
+  padding: 2px 7px;
+  border-radius: 6px;
+  margin-right: 4px;
+}
+.card-foot {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px;
+}
+
+/* Hide URL rows based on selected env */
+body.show-local  .url-lan, body.show-local  .url-tunnel, body.show-local  .url-prod { display: none; }
+body.show-lan    .url-local, body.show-lan    .url-tunnel, body.show-lan    .url-prod { display: none; }
+body.show-tunnel .url-local, body.show-tunnel .url-lan,    body.show-tunnel .url-prod { display: none; }
+body.show-prod   .url-local, body.show-prod   .url-lan,    body.show-prod   .url-tunnel { display: none; }
+
+/* footer */
+footer {
+  max-width: 1200px; margin: 48px auto 0;
+  padding: 32px 24px;
+  border-top: 1px solid var(--line);
+  font-size: 12px; color: var(--ink-faint);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+
+/* Toast */
+#toast {
+  position: fixed; left: 50%; bottom: 32px;
+  transform: translateX(-50%);
+  background: rgba(44,42,38,0.94);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 22px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0;
+  transition: opacity .25s;
+  z-index: 9999; pointer-events: none;
+}
+#toast.show { opacity: 1; }
+
+@media (max-width: 900px) {
+  .env-bar { grid-template-columns: 1fr 1fr; }
+  header { padding: 40px 20px 24px; }
+  .toolbar { padding: 0 20px; }
+  .grid { padding: 0 20px; gap: 14px; }
+}
+@media (max-width: 500px) {
+  .env-bar { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: 1fr; }
+  .card { padding: 18px; }
+}
+</style>
+</head>
+<body class="show-all">
+
+<header>
+  <span class="eyebrow">— KINOSHITA STUDIO / INDEX</span>
+  <h1>プロダクト <em>ダッシュボード</em></h1>
+  <p class="lead">これまで作った Web プロダクトの一覧。ローカル・宅内 LAN・Tailscale 経由・GitHub Pages 本番の 4環境でアクセスできます。URL をタップで開く、コピーアイコンで クリップボードへ。</p>
+</header>
+
+<div class="env-bar">
+  <div class="env-card local">
+    <div class="env-title"><span class="dot"></span>LOCAL</div>
+    <div class="env-url">http://localhost:8001</div>
+    <div class="env-note">この Mac から</div>
+  </div>
+  <div class="env-card lan">
+    <div class="env-title"><span class="dot"></span>HOME LAN</div>
+    <div class="env-url">http://192.168.0.10:8001</div>
+    <div class="env-note">同じ WiFi 内の端末から（iPhone等）</div>
+  </div>
+  <div class="env-card tunnel">
+    <div class="env-title"><span class="dot"></span>TAILSCALE</div>
+    <div class="env-url">http://100.107.218.60:8001</div>
+    <div class="env-note">外出先からVPN経由（Tailscale ON）</div>
+  </div>
+  <div class="env-card prod">
+    <div class="env-title"><span class="dot"></span>PRODUCTION</div>
+    <div class="env-url">kinoshitastudio.github.io</div>
+    <div class="env-note">GitHub Pages 公開</div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <input type="text" class="search" id="search" placeholder="🔍 プロジェクト・フォルダ名で検索..." oninput="applyFilter()">
+  <div class="env-toggle" id="envToggle">
+    <button class="active" onclick="setEnv('all')">すべて</button>
+    <button onclick="setEnv('local')">Local</button>
+    <button onclick="setEnv('lan')">LAN</button>
+    <button onclick="setEnv('tunnel')">Tailscale</button>
+    <button onclick="setEnv('prod')">Prod</button>
+  </div>
+  <span class="count" id="count">— 件</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  <span>© 2025 KINOSHITA STUDIO — Developed by Takahiro Kinoshita</span>
+  <span><span class="mono">apps.html</span> · 自動リストではなく手動管理なのでプロジェクト追加時は要編集</span>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+// ─ Project list ─
+// 追加時はここに一行足すだけ
+const PROJECTS = [
+  { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀＋周辺152スポットを年齢・天気・時間で1枚に絞るPWA。キャラ3匹とパパママ子のファミリー世界観付き。', tags:['PWA','Firebase','Leaflet','kodo-chan'] },
+  { id:'kinoshita_os',     title:'KINOSHITA OS',     emoji:'🖥', entry:'index.html', sub:'スタジオのOS風 index', desc:'スタジオの自己紹介・作品・哲学をデスクトップOS風に展開するポートフォリオ。', tags:['portfolio','monochrome'] },
+  { id:'black_mirror',     title:'Black Mirror Board', emoji:'◼', entry:'index.html', sub:'鉛筆ストローク黒板', desc:'コーナー検出付きquad-midpoint smoothingで「描いたまま残る」黒板。デザイナーの直感 × ハッカーのコマンド。', tags:['canvas','drawing','board'] },
+  { id:'bent',             title:'BENT',             emoji:'✂️', entry:'index.html', sub:'cuts-only video editor', desc:'カット編集だけに振り切ったシンプル動画エディタ。エフェクト・トランジションなし。', tags:['video','editor'] },
+  { id:'shiga_craft',      title:'SHIGA CRAFT',      emoji:'🍶', entry:'index.html', sub:'Crafts of Lake Biwa\'s Shores', desc:'琵琶湖畔の伝統工芸を紹介するギャラリーサイト。職人インタビュー・工房案内・オンラインショップ導線。', tags:['gallery','editorial'] },
+  { id:'signal-main',      title:'SIGNAL',           emoji:'📡', entry:'index.html', sub:'その違和感、気のせいで終わらせて？', desc:'日々の小さな違和感を記録し、パターンを可視化するセルフモニタリングツール。', tags:['journaling','insight'] },
+  { id:'bear-radar-main',  title:'KUMA SIGNAL',      emoji:'🐻', entry:'index.html', sub:'気配を可視化する', desc:'クマ出没情報を地図＋タイムラインで可視化。近隣の気配をそっと察知。', tags:['map','alert'] },
+  { id:'sequencer',        title:'99LETTERS Sequencer', emoji:'🎵', entry:'index.html', sub:'step sequencer', desc:'ブラウザで動くミニマルな16ステップシーケンサ。リズムを文字で打つ感覚。', tags:['audio','music'] },
+  { id:'mekuri_kondate',   title:'日めくり献立',     emoji:'📆', entry:'index.html', sub:'週の献立を自分のリズムで', desc:'日めくりカレンダー風に今週の献立をデザイン。家族の食のリズムを紙媒体感で。', tags:['kitchen','weekly'] },
+  { id:'ninku',            title:'NINKU',            emoji:'🥷', entry:'index.html', sub:'忍空 v0.1', desc:'忍者の感覚で使うコマンドライン風ランチャー。キーの響きで起動。', tags:['launcher','keyboard'] },
+  { id:'ddd',              title:'DDD',              emoji:'🎯', entry:'index.html', sub:'Density · Daily · Design', desc:'密度・日課・デザインの3軸でタスクを振り分けるリスト管理。', tags:['task','design'] },
+  { id:'kody_typography',  title:'KODY Typography',  emoji:'🅰️', entry:'index.html', sub:'Directional Poster Editor', desc:'方向性を主軸にした文字組みポスターエディタ。縦横斜めを直感で。', tags:['type','poster'] },
+  { id:'clearsight',       title:'ClearSight',       emoji:'📱', entry:'index.html', sub:'Virtual E-ink Device', desc:'ブラウザで再現するE-ink端末UI。情報の圧を下げるために紙の質感で見る。', tags:['concept','e-ink'] },
+  { id:'classic_mac',      title:'Classic Macintosh',emoji:'🖨', entry:'index.html', sub:'旧Mac OS風体験', desc:'初代Macintosh OSを再現したデスクトップ体験。モノクロ＋矩形。', tags:['retro','mac'] },
+  { id:'tanomuyo',         title:'頼むよ',           emoji:'🙏', entry:'index.html', sub:'tanomuyo', desc:'誰かに頼みごとをフォーマルに伝えるためのテンプレートランチャー。', tags:['communication'] },
+  { id:'balance_optimizer',title:'Balance Optimizer',emoji:'⚖️', entry:'app.html',   sub:'Subtractive Optimizer', desc:'引き算で整える意思決定補助ツール。足すのではなく削って磨く。', tags:['tool','design-thinking'] },
+  { id:'ai_tool_manager',  title:'AIツール管理君',  emoji:'🤖', entry:'app.html',   sub:'token / rate monitor', desc:'複数のAIツールのトークン消費・レートリミットを一画面で把握。', tags:['AI','monitor'] },
+  { id:'my_name_is_kody',  title:'My Name is Kody',  emoji:'👤', entry:'app.html',   sub:'Kodyのあいさつ', desc:'Kodyちゃんが自己紹介する小さなサイト。キャラクター単体ページ。', tags:['character'] },
+];
+
+// ─ URL builders ─
+const BASE = {
+  local:   'http://localhost:8001',
+  lan:     'http://192.168.0.10:8001',
+  tunnel:  'http://100.107.218.60:8001',
+  prod:    'https://kinoshitastudio.github.io',
+};
+function pathFor(p) { return `/projects/${p.id}/${p.entry}`; }
+function urlFor(env, p) { return BASE[env] + pathFor(p); }
+
+// ─ Render ─
+function render(list) {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = list.map(p => {
+    const path = pathFor(p);
+    const tagsHtml = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
+    return `
+      <div class="card" data-id="${p.id}" data-q="${(p.title + ' ' + p.id + ' ' + (p.sub||'') + ' ' + (p.desc||'')).toLowerCase()}">
+        <div class="card-head">
+          <div class="card-emoji">${p.emoji || '📄'}</div>
+          <div class="card-title-wrap">
+            <div class="card-title">${p.title}</div>
+            <div class="card-sub">/${p.id}/${p.entry}</div>
+          </div>
+        </div>
+        <p class="card-desc">${p.desc || ''}</p>
+        <div class="urls">
+          <a class="url-row url-local" href="${urlFor('local', p)}" target="_blank" rel="noopener">
+            <span class="url-label local">LOCAL</span>
+            <span class="url-path">${BASE.local}${path}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('local', p)}')" aria-label="コピー">⎘</button>
+          </a>
+          <a class="url-row url-lan" href="${urlFor('lan', p)}" target="_blank" rel="noopener">
+            <span class="url-label lan">LAN</span>
+            <span class="url-path">${BASE.lan}${path}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('lan', p)}')" aria-label="コピー">⎘</button>
+          </a>
+          <a class="url-row url-tunnel" href="${urlFor('tunnel', p)}" target="_blank" rel="noopener">
+            <span class="url-label tunnel">TAILSCALE</span>
+            <span class="url-path">${BASE.tunnel}${path}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('tunnel', p)}')" aria-label="コピー">⎘</button>
+          </a>
+          <a class="url-row url-prod" href="${urlFor('prod', p)}" target="_blank" rel="noopener">
+            <span class="url-label prod">PROD</span>
+            <span class="url-path">${BASE.prod}${path}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('prod', p)}')" aria-label="コピー">⎘</button>
+          </a>
+        </div>
+        <div class="card-foot">${tagsHtml}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('count').textContent = list.length + '件';
+}
+
+// ─ Filter ─
+function applyFilter() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const filtered = q
+    ? PROJECTS.filter(p => (p.title + ' ' + p.id + ' ' + (p.sub||'') + ' ' + (p.desc||'') + ' ' + (p.tags||[]).join(' ')).toLowerCase().includes(q))
+    : PROJECTS;
+  render(filtered);
+}
+
+// ─ Env toggle ─
+function setEnv(env) {
+  document.body.className = env === 'all' ? 'show-all' : ('show-' + env);
+  document.querySelectorAll('#envToggle button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ─ Copy ─
+function copyUrl(btn, url) {
+  navigator.clipboard.writeText(url).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = '✓';
+    toast('コピーしました: ' + url);
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '⎘'; }, 1400);
+  }).catch(() => {
+    // Fallback: prompt for manual copy
+    prompt('リンクをコピーしてください', url);
+  });
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg.length > 70 ? msg.slice(0, 68) + '…' : msg;
+  el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+// ─ Init ─
+render(PROJECTS);
+</script>
+</body>
+</html>
