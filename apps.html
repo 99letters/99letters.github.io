@@ -246,6 +246,22 @@ h1 em { font-style: normal; background: linear-gradient(180deg, transparent 65%,
 .url-copy:hover { color: var(--ink); background: rgba(0,0,0,0.05); }
 .url-copy.copied { color: var(--green); }
 
+/* 未デプロイ表示 */
+.url-prod-pending { opacity: 0.55; }
+.url-prod-pending:hover { opacity: 1; }
+.prod-undeploy {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #B04A2A;
+  background: #FBE8E0;
+  border: 1px solid #F0C5B0;
+  padding: 2px 7px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+.card-prod-pending .card-emoji { filter: grayscale(20%); }
+
 .urls {
   display: flex; flex-direction: column; gap: 5px;
 }
@@ -333,8 +349,8 @@ footer {
   </div>
   <div class="env-card prod">
     <div class="env-title"><span class="dot"></span>PRODUCTION</div>
-    <div class="env-url">kinoshitastudio.github.io</div>
-    <div class="env-note">GitHub Pages 公開</div>
+    <div class="env-url">kinoshitastudio.github.io/{id}/</div>
+    <div class="env-note">GitHub Pages・各プロジェクト個別リポ</div>
   </div>
 </div>
 
@@ -363,17 +379,25 @@ footer {
 // ─ Project list ─
 // 追加時はここに一行足すだけ
 const PROJECTS = [
+  // ── 新規（2026-04-25） ──
+  { id:'ore_no_denim',     title:'俺のデニム',          emoji:'👖', entry:'index.html', sub:'デニムマニア向けSNS兼マップ', desc:'穿き込み日数・洗濯回数を記録するエイジングログSNS。聖地マップとマイクローゼットで、自分のデニムを育て・記録・共有する。Indigo Masculinity 美学。', tags:['SNS','denim','mania','dark'] },
+  // ── 新規（2026-04-24） ──
+  { id:'kodydraw',         title:'KODYDRAW',           emoji:'🎨', entry:'index.html', sub:'keyboard-based drawing tool', desc:'hjkl で動かして d を押しながら塗る純粋にキーボードだけで描くピクセルツール。カーソルは画面端でラップ。Etch 系のミニマル UI。', tags:['drawing','keyboard','pixel','minimal'] },
+  { id:'drawegg',          title:'DRAWEGG',            emoji:'🥚', entry:'index.html', sub:'cellular automata × pixel grid', desc:'2つのカーソル(描画用 × オートマ用)で 1-bit ドットを置き、Conwayʼs Life・Flow・Langtonʼs Ant でキャンバスを進化させる。', tags:['drawing','cellular-automata','pixel','keyboard'] },
+  { id:'pixel_bomb',       title:'PIXEL BOMB',         emoji:'💣', entry:'index.html', sub:'collapse an image into itself', desc:'画像を 16×16 ブロックに分割、複雑度でランクして低複雑度を消去 → 残ったブロックが中心に重力で落ち込み、画像が自身に向かって崩壊する。', tags:['image','art','generative'] },
+  // ── 既存 ──
   { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀＋周辺152スポットを年齢・天気・時間で1枚に絞るPWA。キャラ3匹とパパママ子のファミリー世界観付き。', tags:['PWA','Firebase','Leaflet','kodo-chan'] },
   { id:'kinoshita_os',     title:'KINOSHITA OS',     emoji:'🖥', entry:'index.html', sub:'スタジオのOS風 index', desc:'スタジオの自己紹介・作品・哲学をデスクトップOS風に展開するポートフォリオ。', tags:['portfolio','monochrome'] },
-  { id:'black_mirror',     title:'Black Mirror Board', emoji:'◼', entry:'index.html', sub:'鉛筆ストローク黒板', desc:'コーナー検出付きquad-midpoint smoothingで「描いたまま残る」黒板。デザイナーの直感 × ハッカーのコマンド。', tags:['canvas','drawing','board'] },
+  { id:'black_mirror',     title:'Black Mirror Board', emoji:'◼', entry:'index.html', sub:'鉛筆ストローク黒板', desc:'コーナー検出付きquad-midpoint smoothingで「描いたまま残る」黒板。デザイナーの直感 × ハッカーのコマンド。本番は別アカウント blackmirrorboard。', tags:['canvas','drawing','board','external-launch'], prodUrl:'https://blackmirrorboard.github.io/bmboard/' },
   { id:'bent',             title:'BENT',             emoji:'✂️', entry:'index.html', sub:'cuts-only video editor', desc:'カット編集だけに振り切ったシンプル動画エディタ。エフェクト・トランジションなし。', tags:['video','editor'] },
   { id:'shiga_craft',      title:'SHIGA CRAFT',      emoji:'🍶', entry:'index.html', sub:'Crafts of Lake Biwa\'s Shores', desc:'琵琶湖畔の伝統工芸を紹介するギャラリーサイト。職人インタビュー・工房案内・オンラインショップ導線。', tags:['gallery','editorial'] },
   { id:'signal-main',      title:'SIGNAL',           emoji:'📡', entry:'index.html', sub:'その違和感、気のせいで終わらせて？', desc:'日々の小さな違和感を記録し、パターンを可視化するセルフモニタリングツール。', tags:['journaling','insight'] },
   { id:'bear-radar-main',  title:'KUMA SIGNAL',      emoji:'🐻', entry:'index.html', sub:'気配を可視化する', desc:'クマ出没情報を地図＋タイムラインで可視化。近隣の気配をそっと察知。', tags:['map','alert'] },
   { id:'sequencer',        title:'99LETTERS Sequencer', emoji:'🎵', entry:'index.html', sub:'step sequencer', desc:'ブラウザで動くミニマルな16ステップシーケンサ。リズムを文字で打つ感覚。', tags:['audio','music'] },
-  { id:'mekuri_kondate',   title:'日めくり献立',     emoji:'📆', entry:'index.html', sub:'週の献立を自分のリズムで', desc:'日めくりカレンダー風に今週の献立をデザイン。家族の食のリズムを紙媒体感で。', tags:['kitchen','weekly'] },
+  { id:'himekuri_kondate', title:'日めくり献立',      emoji:'🍱', entry:'index.html', sub:'週の献立を自分のリズムで', desc:'お気に入りを中心に21食/週を組み立てるローカル完結型アプリ。Notion寄りのミニマルUIに、ジーンズSVG的ではないキャラ要素と日めくりカード。', tags:['kitchen','weekly','notion'] },
+  { id:'jean_of_denim',    title:'デニムのジーン',    emoji:'👖', entry:'index.html', sub:'大人のためのデニム入門', desc:'歴史・素材・アイテム・メーカー・着こなし・用語を一気通貫で学べる静的サイト。サルのジーンが案内する、大人向けフィールドガイド。app.htmlでシングルページアプリ版も。', tags:['guide','denim','editorial'] },
   { id:'ninku',            title:'NINKU',            emoji:'🥷', entry:'index.html', sub:'忍空 v0.1', desc:'忍者の感覚で使うコマンドライン風ランチャー。キーの響きで起動。', tags:['launcher','keyboard'] },
-  { id:'ddd',              title:'DDD',              emoji:'🎯', entry:'index.html', sub:'Density · Daily · Design', desc:'密度・日課・デザインの3軸でタスクを振り分けるリスト管理。', tags:['task','design'] },
+  { id:'ddd',              title:'DDD',              emoji:'🎯', entry:'index.html', sub:'Density · Daily · Design', desc:'密度・日課・デザインの3軸でタスクを振り分けるリスト管理。本番は別アカウント dddtodo。', tags:['task','design','external-launch'], prodUrl:'https://dddtodo.github.io/ddd/' },
   { id:'kody_typography',  title:'KODY Typography',  emoji:'🅰️', entry:'index.html', sub:'Directional Poster Editor', desc:'方向性を主軸にした文字組みポスターエディタ。縦横斜めを直感で。', tags:['type','poster'] },
   { id:'clearsight',       title:'ClearSight',       emoji:'📱', entry:'index.html', sub:'Virtual E-ink Device', desc:'ブラウザで再現するE-ink端末UI。情報の圧を下げるために紙の質感で見る。', tags:['concept','e-ink'] },
   { id:'classic_mac',      title:'Classic Macintosh',emoji:'🖨', entry:'index.html', sub:'旧Mac OS風体験', desc:'初代Macintosh OSを再現したデスクトップ体験。モノクロ＋矩形。', tags:['retro','mac'] },
@@ -390,17 +414,37 @@ const BASE = {
   tunnel:  'http://100.107.218.60:8001',
   prod:    'https://kinoshitastudio.github.io',
 };
-function pathFor(p) { return `/projects/${p.id}/${p.entry}`; }
-function urlFor(env, p) { return BASE[env] + pathFor(p); }
+// Production はプロジェクトごとに個別リポ(kinoshitastudio/{id})のため /projects/ プレフィックスなし
+// Local/LAN/Tailscale はこのMacのレポルートを serve しているため /projects/{id}/ が必要
+function pathFor(env, p) {
+  return env === 'prod'
+    ? `/${p.id}/${p.entry}`
+    : `/projects/${p.id}/${p.entry}`;
+}
+function urlFor(env, p) {
+  // 個別 PROD オーバーライド(別アカウント・別ドメインで公開済みのもの)
+  if (env === 'prod' && p.prodUrl) return p.prodUrl;
+  return BASE[env] + pathFor(env, p);
+}
+
+// PROD 公開済みプロジェクト(kinoshitastudio.github.io/{id}/ が 200 を返すもの)
+// 2026-04-24 時点で実測。未掲載は「未デプロイ」バッジを表示
+const PROD_LIVE = new Set([
+  'kodoco','black_mirror','bent','himekuri_kondate','jean_of_denim',
+  'ddd','kody_typography','balance_optimizer',
+]);
 
 // ─ Render ─
 function render(list) {
   const grid = document.getElementById('grid');
   grid.innerHTML = list.map(p => {
-    const path = pathFor(p);
     const tagsHtml = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
+    const prodLive = PROD_LIVE.has(p.id);
+    const prodBadge = prodLive
+      ? ''
+      : '<span class="prod-undeploy" title="kinoshitastudio.github.io/' + p.id + '/ に未デプロイ">未デプロイ</span>';
     return `
-      <div class="card" data-id="${p.id}" data-q="${(p.title + ' ' + p.id + ' ' + (p.sub||'') + ' ' + (p.desc||'')).toLowerCase()}">
+      <div class="card${prodLive ? '' : ' card-prod-pending'}" data-id="${p.id}" data-q="${(p.title + ' ' + p.id + ' ' + (p.sub||'') + ' ' + (p.desc||'')).toLowerCase()}">
         <div class="card-head">
           <div class="card-emoji">${p.emoji || '📄'}</div>
           <div class="card-title-wrap">
@@ -412,22 +456,23 @@ function render(list) {
         <div class="urls">
           <a class="url-row url-local" href="${urlFor('local', p)}" target="_blank" rel="noopener">
             <span class="url-label local">LOCAL</span>
-            <span class="url-path">${BASE.local}${path}</span>
+            <span class="url-path">${urlFor('local', p)}</span>
             <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('local', p)}')" aria-label="コピー">⎘</button>
           </a>
           <a class="url-row url-lan" href="${urlFor('lan', p)}" target="_blank" rel="noopener">
             <span class="url-label lan">LAN</span>
-            <span class="url-path">${BASE.lan}${path}</span>
+            <span class="url-path">${urlFor('lan', p)}</span>
             <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('lan', p)}')" aria-label="コピー">⎘</button>
           </a>
           <a class="url-row url-tunnel" href="${urlFor('tunnel', p)}" target="_blank" rel="noopener">
             <span class="url-label tunnel">TAILSCALE</span>
-            <span class="url-path">${BASE.tunnel}${path}</span>
+            <span class="url-path">${urlFor('tunnel', p)}</span>
             <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('tunnel', p)}')" aria-label="コピー">⎘</button>
           </a>
-          <a class="url-row url-prod" href="${urlFor('prod', p)}" target="_blank" rel="noopener">
+          <a class="url-row url-prod${prodLive ? '' : ' url-prod-pending'}" href="${urlFor('prod', p)}" target="_blank" rel="noopener">
             <span class="url-label prod">PROD</span>
-            <span class="url-path">${BASE.prod}${path}</span>
+            <span class="url-path">${urlFor('prod', p)}</span>
+            ${prodBadge}
             <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('prod', p)}')" aria-label="コピー">⎘</button>
           </a>
         </div>
