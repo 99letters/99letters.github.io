@@ -104,6 +104,61 @@ h1 em { font-style: normal; background: linear-gradient(180deg, transparent 65%,
 }
 .env-note { font-size: 10.5px; color: var(--ink-soft); }
 
+/* ─ Desktop tools section (SNS schedule HTMLs etc.) ─ */
+.tools-section {
+  max-width: 1200px;
+  margin: 18px auto 0;
+  padding: 0 24px;
+}
+.tools-eyebrow {
+  color: var(--orange);
+  background: var(--peach-soft);
+  margin-bottom: 8px;
+}
+.tools-note {
+  font-size: 11px; color: var(--ink-faint);
+  margin: 4px 0 12px;
+}
+.tools-note code {
+  background: var(--bg-warm);
+  padding: 1px 5px; border-radius: 4px;
+  font-size: 10.5px;
+}
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px;
+}
+.tool-card {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.tool-card:hover {
+  border-color: var(--ink);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(44,42,38,0.06);
+}
+.tool-emoji {
+  font-size: 22px; line-height: 1; flex-shrink: 0;
+}
+.tool-text { min-width: 0; flex: 1; }
+.tool-title {
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 1px;
+  letter-spacing: -0.01em;
+}
+.tool-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--ink-soft);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
 /* ─ Toolbar ─ */
 .toolbar {
   max-width: 1200px;
@@ -354,6 +409,41 @@ footer {
   </div>
 </div>
 
+<section class="tools-section">
+  <span class="eyebrow tools-eyebrow">— SNS / 編集ツール (Desktop)</span>
+  <div class="tools-note">file:// URL なので、apps.html を <code>file://</code> で開いた時に動作します（ブラウザのセキュリティで http:// 経由では開けません）</div>
+  <div class="tools-grid">
+    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/bmboard_sns_20days.html" target="_blank" rel="noopener">
+      <span class="tool-emoji">◼</span>
+      <div class="tool-text">
+        <div class="tool-title">BMBoard SNS 20日分</div>
+        <div class="tool-sub">bmboard_sns_20days.html</div>
+      </div>
+    </a>
+    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/atelier_sns_10days.html" target="_blank" rel="noopener">
+      <span class="tool-emoji">🌸</span>
+      <div class="tool-text">
+        <div class="tool-title">Atelier SNS 10日分</div>
+        <div class="tool-sub">atelier_sns_10days.html</div>
+      </div>
+    </a>
+    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/kodoco_sns_20days.html" target="_blank" rel="noopener">
+      <span class="tool-emoji">🌿</span>
+      <div class="tool-text">
+        <div class="tool-title">KODOCO SNS 20日分</div>
+        <div class="tool-sub">kodoco_sns_20days.html</div>
+      </div>
+    </a>
+    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/atelier_ogp_generator.html" target="_blank" rel="noopener">
+      <span class="tool-emoji">🖼</span>
+      <div class="tool-text">
+        <div class="tool-title">Atelier OGP ジェネレータ</div>
+        <div class="tool-sub">atelier_ogp_generator.html</div>
+      </div>
+    </a>
+  </div>
+</section>
+
 <div class="toolbar">
   <input type="text" class="search" id="search" placeholder="🔍 プロジェクト・フォルダ名で検索..." oninput="applyFilter()">
   <div class="env-toggle" id="envToggle">
@@ -369,8 +459,8 @@ footer {
 <div class="grid" id="grid"></div>
 
 <footer>
-  <span>© 2025 KINOSHITA STUDIO — Developed by Takahiro Kinoshita</span>
-  <span><span class="mono">apps.html</span> · 自動リストではなく手動管理なのでプロジェクト追加時は要編集</span>
+  <span>© 2026 KINOSHITA STUDIO — Developed by Takahiro Kinoshita</span>
+  <span><span class="mono">apps.html</span> · last updated 2026-05-14</span>
 </footer>
 
 <div id="toast"></div>
@@ -381,8 +471,8 @@ footer {
 const PROJECTS = [
   // ── 最前線 (本番公開中・独自ドメイン or アカウント発行済) ──
   { id:'black_mirror',     title:'Black Mirror Board', emoji:'◼', entry:'index.html', sub:'鉛筆ストローク黒板', desc:'コーナー検出付きquad-midpoint smoothingで「描いたまま残る」黒板。デザイナーの直感 × ハッカーのコマンド。独自ドメイン bmboard.studio で公開中。', tags:['canvas','drawing','board','external-launch'], prodUrl:'https://bmboard.studio/' },
-  { id:'atelier',          title:'Ateli.er',         emoji:'🌸', entry:'index.html', sub:'a courtyard, a remainder', desc:'未発表のための、静かな中庭。SNSでも公開でもない第三の場所。invite-only、課金なし、Are.na 系UI。Supabase 認証 + multi-user。本番は独自ドメイン atelistudio.com。', tags:['Supabase','invite-only','community','art'], prodUrl:'https://atelistudio.com/' },
-  { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀168スポットを年齢・天気・時間で1枚に絞るPWA。キャラ10匹のコレクション、口コミ投稿・スポット申請、複数端末同期に対応（Supabase 認証）。本番は別アカウント kinoshitastudio で公開中。', tags:['PWA','Supabase','Auth','口コミ','子連れ'], prodUrl:'https://kinoshitastudio.github.io/kodoco/' },
+  { id:'atelier',          folder:'Ateli.er',          title:'Ateli.er',         emoji:'🌸', entry:'index.html', sub:'a courtyard, a remainder', desc:'未発表のための、静かな中庭。SNSでも公開でもない第三の場所。invite-only、課金なし、Are.na 系UI。Supabase 認証 + multi-user。本番は独自ドメイン atelistudio.com。', tags:['Supabase','invite-only','community','art'], prodUrl:'https://atelistudio.com/' },
+  { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀168スポットを年齢・天気・時間で1枚に絞るPWA。50プラン、現在地連動の距離順並び替え、季節フィルタ、キャラ10匹のコレクション、口コミ投稿・スポット申請、複数端末同期 (Supabase 認証)。独自ドメイン kodoco.jp で公開中。', tags:['PWA','Supabase','Auth','口コミ','子連れ','滋賀'], prodUrl:'https://kodoco.jp/' },
   { id:'ddd',              title:'DDD',              emoji:'🎯', entry:'index.html', sub:'Density · Daily · Design', desc:'密度・日課・デザインの3軸でタスクを振り分けるリスト管理。本番は別アカウント dddtodo。', tags:['task','design','external-launch'], prodUrl:'https://dddtodo.github.io/ddd/' },
 
   // ── 新規（2026-04-25） ──
@@ -391,6 +481,7 @@ const PROJECTS = [
   { id:'kodydraw',         title:'KODYDRAW',           emoji:'🎨', entry:'index.html', sub:'keyboard-based drawing tool', desc:'hjkl で動かして d を押しながら塗る純粋にキーボードだけで描くピクセルツール。カーソルは画面端でラップ。Etch 系のミニマル UI。', tags:['drawing','keyboard','pixel','minimal'] },
   { id:'drawegg',          title:'DRAWEGG',            emoji:'🥚', entry:'index.html', sub:'cellular automata × pixel grid', desc:'2つのカーソル(描画用 × オートマ用)で 1-bit ドットを置き、Conwayʼs Life・Flow・Langtonʼs Ant でキャンバスを進化させる。', tags:['drawing','cellular-automata','pixel','keyboard'] },
   { id:'pixel_bomb',       title:'PIXEL BOMB',         emoji:'💣', entry:'index.html', sub:'collapse an image into itself', desc:'画像を 16×16 ブロックに分割、複雑度でランクして低複雑度を消去 → 残ったブロックが中心に重力で落ち込み、画像が自身に向かって崩壊する。', tags:['image','art','generative'] },
+  { id:'decklog',          title:'DECKLOG',            emoji:'🃏', entry:'index.html', sub:'deck log', desc:'デッキ・カード系の記録ツール。app.js + style.css の構成で、JSON データを表示。', tags:['log','collection'] },
   // ── 既存 ──
   { id:'kinoshita_os',     title:'KINOSHITA OS',     emoji:'🖥', entry:'index.html', sub:'スタジオのOS風 index', desc:'スタジオの自己紹介・作品・哲学をデスクトップOS風に展開するポートフォリオ。', tags:['portfolio','monochrome'] },
   { id:'bent',             title:'BENT',             emoji:'✂️', entry:'index.html', sub:'cuts-only video editor', desc:'カット編集だけに振り切ったシンプル動画エディタ。エフェクト・トランジションなし。', tags:['video','editor'] },
@@ -420,9 +511,12 @@ const BASE = {
 // Production はプロジェクトごとに個別リポ(kinoshitastudio/{id})のため /projects/ プレフィックスなし
 // Local/LAN/Tailscale はこのMacのレポルートを serve しているため /projects/{id}/ が必要
 function pathFor(env, p) {
+  // p.folder で実フォルダ名をオーバーライド可能 (例: id='atelier' なのにフォルダは 'Ateli.er')。
+  // 未指定なら id をそのまま使う。
+  const folder = p.folder || p.id;
   return env === 'prod'
-    ? `/${p.id}/${p.entry}`
-    : `/projects/${p.id}/${p.entry}`;
+    ? `/${folder}/${p.entry}`
+    : `/projects/${folder}/${p.entry}`;
 }
 function urlFor(env, p) {
   // 個別 PROD オーバーライド(別アカウント・別ドメインで公開済みのもの)
