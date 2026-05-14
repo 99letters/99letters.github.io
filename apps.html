@@ -126,38 +126,44 @@ h1 em { font-style: normal; background: linear-gradient(180deg, transparent 65%,
 }
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
 }
 .tool-card {
-  display: flex; align-items: center; gap: 10px;
-  padding: 11px 14px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  text-decoration: none;
-  color: var(--ink);
-  transition: border-color .15s, transform .15s, box-shadow .15s;
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
 }
 .tool-card:hover {
   border-color: var(--ink);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(44,42,38,0.06);
+  box-shadow: 0 8px 20px rgba(44,42,38,0.06);
+}
+.tool-card-head {
+  display: flex; align-items: flex-start; gap: 10px;
 }
 .tool-emoji {
-  font-size: 22px; line-height: 1; flex-shrink: 0;
+  font-size: 24px; line-height: 1; flex-shrink: 0;
+  margin-top: 2px;
 }
 .tool-text { min-width: 0; flex: 1; }
 .tool-title {
-  font-size: 13px; font-weight: 700;
-  margin-bottom: 1px;
+  font-size: 14px; font-weight: 800;
+  margin-bottom: 2px;
   letter-spacing: -0.01em;
 }
 .tool-sub {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--ink-soft);
+  font-size: 11px; color: var(--ink-soft);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+.tool-urls { display: flex; flex-direction: column; gap: 5px; }
+
+/* tools section hidden in PROD-only env (no PROD URLs for these) */
+body.show-prod .tools-section { display: none; }
 
 /* ─ Toolbar ─ */
 .toolbar {
@@ -411,37 +417,8 @@ footer {
 
 <section class="tools-section">
   <span class="eyebrow tools-eyebrow">— SNS / 編集ツール (Desktop)</span>
-  <div class="tools-note">file:// URL なので、apps.html を <code>file://</code> で開いた時に動作します（ブラウザのセキュリティで http:// 経由では開けません）</div>
-  <div class="tools-grid">
-    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/bmboard_sns_20days.html" target="_blank" rel="noopener">
-      <span class="tool-emoji">◼</span>
-      <div class="tool-text">
-        <div class="tool-title">BMBoard SNS 20日分</div>
-        <div class="tool-sub">bmboard_sns_20days.html</div>
-      </div>
-    </a>
-    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/atelier_sns_10days.html" target="_blank" rel="noopener">
-      <span class="tool-emoji">🌸</span>
-      <div class="tool-text">
-        <div class="tool-title">Atelier SNS 10日分</div>
-        <div class="tool-sub">atelier_sns_10days.html</div>
-      </div>
-    </a>
-    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/kodoco_sns_20days.html" target="_blank" rel="noopener">
-      <span class="tool-emoji">🌿</span>
-      <div class="tool-text">
-        <div class="tool-title">KODOCO SNS 20日分</div>
-        <div class="tool-sub">kodoco_sns_20days.html</div>
-      </div>
-    </a>
-    <a class="tool-card" href="file:///Users/kinoshitatakahiro/Desktop/atelier_ogp_generator.html" target="_blank" rel="noopener">
-      <span class="tool-emoji">🖼</span>
-      <div class="tool-text">
-        <div class="tool-title">Atelier OGP ジェネレータ</div>
-        <div class="tool-sub">atelier_ogp_generator.html</div>
-      </div>
-    </a>
-  </div>
+  <div class="tools-note"><code>~/Desktop/Github/99letters.github.io/sns/</code> に Desktop 実体への symlink。ローカルサーバ経由なので iPhone (LAN) や 外出先 (Tailscale) からも同じ URL でアクセス可能</div>
+  <div class="tools-grid" id="toolsGrid"></div>
 </section>
 
 <div class="toolbar">
@@ -617,8 +594,57 @@ function toast(msg) {
   toast._t = setTimeout(() => el.classList.remove('show'), 1800);
 }
 
+// ─ Desktop tools (SNS schedules + OGP generator) ─
+// 実体は ~/Desktop に置きつつ ~/Github/99letters.github.io/sns/ に symlink。
+// LOCAL/LAN/Tailscale 全てで `/sns/<file>` で開ける。PROD は無し (gitignored)。
+const TOOLS = [
+  { id:'bmboard_sns_20days',    title:'BMBoard SNS 20日分',     emoji:'◼',  file:'bmboard_sns_20days.html',    sub:'30 日分の SNS 投稿スケジュール' },
+  { id:'atelier_sns_10days',    title:'Atelier SNS 10日分',     emoji:'🌸', file:'atelier_sns_10days.html',    sub:'20 日分の SNS 投稿スケジュール' },
+  { id:'kodoco_sns_20days',     title:'KODOCO SNS 20日分',      emoji:'🌿', file:'kodoco_sns_20days.html',     sub:'20 日分の SNS 投稿スケジュール' },
+  { id:'atelier_ogp_generator', title:'Atelier OGP ジェネレータ', emoji:'🖼', file:'atelier_ogp_generator.html', sub:'OGP 画像の生成ツール' },
+];
+
+function toolUrl(env, t) { return BASE[env] + '/sns/' + t.file; }
+
+function renderTools() {
+  const grid = document.getElementById('toolsGrid');
+  if (!grid) return;
+  grid.innerHTML = TOOLS.map(t => {
+    const localU = toolUrl('local', t), lanU = toolUrl('lan', t), tunU = toolUrl('tunnel', t);
+    return `
+      <div class="tool-card" data-id="${t.id}">
+        <div class="tool-card-head">
+          <span class="tool-emoji">${t.emoji}</span>
+          <div class="tool-text">
+            <div class="tool-title">${t.title}</div>
+            <div class="tool-sub">${t.sub}</div>
+          </div>
+        </div>
+        <div class="tool-urls">
+          <a class="url-row url-local" href="${localU}" target="_blank" rel="noopener">
+            <span class="url-label local">LOCAL</span>
+            <span class="url-path">${localU}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${localU}')" aria-label="コピー">⎘</button>
+          </a>
+          <a class="url-row url-lan" href="${lanU}" target="_blank" rel="noopener">
+            <span class="url-label lan">LAN</span>
+            <span class="url-path">${lanU}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${lanU}')" aria-label="コピー">⎘</button>
+          </a>
+          <a class="url-row url-tunnel" href="${tunU}" target="_blank" rel="noopener">
+            <span class="url-label tunnel">TAILSCALE</span>
+            <span class="url-path">${tunU}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${tunU}')" aria-label="コピー">⎘</button>
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 // ─ Init ─
 render(PROJECTS);
+renderTools();
 </script>
 </body>
 </html>
