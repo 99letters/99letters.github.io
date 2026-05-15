@@ -290,6 +290,17 @@ body.show-prod .tools-section { display: none; }
 .url-label.lan      { background: #E7EFF5; color: #5B7899; }
 .url-label.tunnel   { background: #FBEADC; color: #B67A5A; }
 .url-label.prod     { background: #FAF1D4; color: #A58F3A; }
+.url-label.admin    { background: #FBE0E0; color: #B0312A; }
+.admin-note {
+  margin-top: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: #B0312A;
+  background: #FFF6F6;
+  border-left: 2px solid #FBE0E0;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
 .url-path {
   flex: 1; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -437,7 +448,7 @@ footer {
 
 <footer>
   <span>© 2026 KINOSHITA STUDIO — Developed by Takahiro Kinoshita</span>
-  <span><span class="mono">apps.html</span> · last updated 2026-05-14</span>
+  <span><span class="mono">apps.html</span> · last updated 2026-05-15</span>
 </footer>
 
 <div id="toast"></div>
@@ -448,8 +459,15 @@ footer {
 const PROJECTS = [
   // ── 最前線 (本番公開中・独自ドメイン or アカウント発行済) ──
   { id:'black_mirror',     title:'Black Mirror Board', emoji:'◼', entry:'index.html', sub:'鉛筆ストローク黒板', desc:'コーナー検出付きquad-midpoint smoothingで「描いたまま残る」黒板。デザイナーの直感 × ハッカーのコマンド。独自ドメイン bmboard.studio で公開中。', tags:['canvas','drawing','board','external-launch'], prodUrl:'https://bmboard.studio/' },
-  { id:'atelier',          folder:'Ateli.er',          title:'Ateli.er',         emoji:'🌸', entry:'index.html', sub:'a courtyard, a remainder', desc:'未発表のための、静かな中庭。SNSでも公開でもない第三の場所。invite-only、課金なし、Are.na 系UI。Supabase 認証 + multi-user。本番は独自ドメイン atelistudio.com。', tags:['Supabase','invite-only','community','art'], prodUrl:'https://atelistudio.com/' },
-  { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀168スポットを年齢・天気・時間で1枚に絞るPWA。50プラン、現在地連動の距離順並び替え、季節フィルタ、キャラ10匹のコレクション、口コミ投稿・スポット申請、複数端末同期 (Supabase 認証)。独自ドメイン kodoco.jp で公開中。', tags:['PWA','Supabase','Auth','口コミ','子連れ','滋賀'], prodUrl:'https://kodoco.jp/' },
+  { id:'atelier',          folder:'Ateli.er',          title:'Ateli.er',         emoji:'🌸', entry:'index.html', sub:'a courtyard, a remainder', desc:'未発表のための、静かな中庭。SNSでも公開でもない第三の場所。invite-only、課金なし、Are.na 系UI。Supabase 認証 + multi-user。本番は独自ドメイン atelistudio.com。', tags:['Supabase','invite-only','community','art'], prodUrl:'https://atelistudio.com/', admin:[
+    { label:'PLAYER', url:'https://atelistudio.com/player.html' },
+    { label:'SUPABASE', url:'https://supabase.com/dashboard/project/boaslcfdjdjaryahpged' },
+  ], adminNote:'🔑 ユーザーコメント(footprints)・block(public_blocks)・profiles の管理は Supabase Dashboard → Table Editor。PW は Obsidian /【重要】PW管理.md' },
+  { id:'kodoco',           title:'KODOCO',           emoji:'🌿', entry:'index.html', sub:'子連れで今日どこいく？', desc:'滋賀168スポットを年齢・天気・時間で1枚に絞るPWA。50プラン、現在地連動の距離順並び替え、季節フィルタ、キャラ10匹のコレクション、口コミ投稿・スポット申請、複数端末同期 (Supabase 認証)。独自ドメイン kodoco.jp で公開中。', tags:['PWA','Supabase','Auth','口コミ','子連れ','滋賀'], prodUrl:'https://kodoco.jp/', admin:[
+    { label:'ADMIN', url:'https://kodoco.jp/admin.html' },
+    { label:'GUIDE', url:'https://kodoco.jp/admin-guide.html' },
+    { label:'SUPABASE', url:'https://supabase.com/dashboard/project/vpvsngmpxwevizkvbhtn' },
+  ], adminNote:'🔑 口コミ・スポット申請の管理は admin.html(ロックアウト機能あり)。DB 直編集は Supabase Dashboard。PW / admin PW は Obsidian /【重要】PW管理.md' },
   { id:'ddd',              title:'DDD',              emoji:'🎯', entry:'index.html', sub:'Density · Daily · Design', desc:'密度・日課・デザインの3軸でタスクを振り分けるリスト管理。本番は別アカウント dddtodo。', tags:['task','design','external-launch'], prodUrl:'https://dddtodo.github.io/ddd/' },
 
   // ── 新規（2026-04-25） ──
@@ -549,6 +567,13 @@ function render(list) {
             ${prodBadge}
             <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${urlFor('prod', p)}')" aria-label="コピー">⎘</button>
           </a>
+          ${(p.admin || []).map(a => `
+          <a class="url-row url-admin" href="${a.url}" target="_blank" rel="noopener">
+            <span class="url-label admin">${a.label}</span>
+            <span class="url-path">${a.url}</span>
+            <button class="url-copy" onclick="event.preventDefault();event.stopPropagation();copyUrl(this,'${a.url}')" aria-label="コピー">⎘</button>
+          </a>`).join('')}
+          ${p.adminNote ? `<div class="admin-note">${p.adminNote}</div>` : ''}
         </div>
         <div class="card-foot">${tagsHtml}</div>
       </div>
@@ -598,10 +623,12 @@ function toast(msg) {
 // 実体は ~/Desktop に置きつつ ~/Github/99letters.github.io/sns/ に symlink。
 // LOCAL/LAN/Tailscale 全てで `/sns/<file>` で開ける。PROD は無し (gitignored)。
 const TOOLS = [
-  { id:'bmboard_sns_20days',    title:'BMBoard SNS 20日分',     emoji:'◼',  file:'bmboard_sns_20days.html',    sub:'30 日分の SNS 投稿スケジュール' },
-  { id:'atelier_sns_10days',    title:'Atelier SNS 10日分',     emoji:'🌸', file:'atelier_sns_10days.html',    sub:'20 日分の SNS 投稿スケジュール' },
-  { id:'kodoco_sns_20days',     title:'KODOCO SNS 20日分',      emoji:'🌿', file:'kodoco_sns_20days.html',     sub:'20 日分の SNS 投稿スケジュール' },
-  { id:'atelier_ogp_generator', title:'Atelier OGP ジェネレータ', emoji:'🖼', file:'atelier_ogp_generator.html', sub:'OGP 画像の生成ツール' },
+  { id:'bmboard_sns_20days',      title:'BMBoard SNS 60日分',        emoji:'◼',  file:'bmboard_sns_20days.html',      sub:'60 日分の SNS 投稿スケジュール (Day 31-60 = Spell Library Era)' },
+  { id:'bmboard_instagram_intro', title:'BMBoard IG 表紙画像',        emoji:'📷', file:'bmboard_instagram_intro.html', sub:'1080×1080 Instagram カバー (動画ツリー先頭用)' },
+  { id:'bmboard_youtube_banner',  title:'BMBoard YouTube バナー',     emoji:'📺', file:'bmboard_youtube_banner.html',  sub:'2560×1440 YouTube チャンネルアート (safe area 1546×423)' },
+  { id:'atelier_sns_10days',      title:'Atelier SNS 20日分',        emoji:'🌸', file:'atelier_sns_10days.html',      sub:'20 日分の SNS 投稿スケジュール' },
+  { id:'kodoco_sns_20days',       title:'KODOCO SNS 20日分',         emoji:'🌿', file:'kodoco_sns_20days.html',       sub:'20 日分の SNS 投稿スケジュール' },
+  { id:'atelier_ogp_generator',   title:'Atelier OGP ジェネレータ',   emoji:'🖼', file:'atelier_ogp_generator.html',   sub:'OGP 画像の生成ツール' },
 ];
 
 function toolUrl(env, t) { return BASE[env] + '/sns/' + t.file; }
